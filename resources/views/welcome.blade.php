@@ -1,95 +1,48 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<body>
+	<div class="container">
+		{!! Form::open(['method' => 'POST', 'url' => 'routeName']) !!}
 
-        <title>Laravel</title>
+		    <div class="form-group{{ $errors->has('bitcoin') ? ' has-error' : '' }}">
+		        {!! Form::label('bitcoin', 'Bitcoin') !!}
+		        {!! Form::number('bitcoin', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'bitcoin']) !!}
+		        <small class="text-danger">{{ $errors->first('bitcoin') }}</small>
+		    </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+		    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+		        {!! Form::label('price', 'Price') !!}
+		        {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'price']) !!}
+		        <small class="text-danger">{{ $errors->first('price') }}</small>
+		    </div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+		    <div class="form-group{{ $errors->has('output') ? ' has-error' : '' }}">
+		        {!! Form::label('output', 'Output') !!}
+		        {!! Form::text('output', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'output', 'disabled']) !!}
+		        <small class="text-danger">{{ $errors->first('output') }}</small>
+		    </div>
 
-            .full-height {
-                height: 100vh;
-            }
+		    <div class="btn-group pull-right">
+		        {!! Form::submit("Submit", ['class' => 'btn btn-success']) !!}
+		    </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+		{!! Form::close() !!}
+	</div>
 
-            .position-ref {
-                position: relative;
-            }
+<!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+		$("#bitcoin,#price").keyup(function () {
 
-            .content {
-                text-align: center;
-            }
+		    $('#output').val($('#bitcoin').val() * $('#price').val());
 
-            .title {
-                font-size: 84px;
-            }
+		});
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+    </script>
+</body>
 </html>
