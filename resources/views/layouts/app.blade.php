@@ -66,5 +66,51 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @if (session('status'))
+      <script type="text/javascript">
+        $.notify({
+        title: '<strong>Sucess!</strong>',
+        message: '{{ session('status') }}'
+        },{
+          type: 'success'
+        },{
+          animate: {
+            enter: 'animated zoomInDown',
+            exit: 'animated zoomOutUp'
+          }
+        });
+      </script>
+      @endif
+
+      @if (session('warning'))
+        <script type="text/javascript">
+        $.notify({
+        title: '<strong>Warning!</strong>',
+        message: '{{ session('warning') }}'
+        },{
+          type: 'warning'
+        },{
+          animate: {
+            enter: 'animated zoomInDown',
+            exit: 'animated zoomOutUp'
+          }
+        });
+      </script>
+      @endif
+      @foreach( $errors->all() as $error )
+         <script type="text/javascript">
+            $.notify({
+            title: '<strong>Warning!</strong>',
+             message: '{{ $error }}'
+            },{
+              type: 'danger'
+            },{
+              animate: {
+                enter: 'animated zoomInDown',
+                exit: 'animated zoomOutUp'
+              }
+            });
+      </script>
+      @endforeach
 </body>
 </html>

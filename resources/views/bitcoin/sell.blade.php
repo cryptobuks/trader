@@ -4,7 +4,7 @@
 @section('content')
 
 	<div class="container">
-		{!! Form::open(['method' => 'POST', 'route' => 'bitcoin.buypost']) !!}
+		{!! Form::open(['method' => 'POST', 'route' => 'bitcoin.sellpost']) !!}
 
 		    <div class="form-group{{ $errors->has('bitcoin') ? ' has-error' : '' }}">
 		        {!! Form::label('bitcoin', 'Bitcoin') !!}

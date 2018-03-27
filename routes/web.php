@@ -30,3 +30,18 @@ Route::get('bitcoin/buy', [
 	'uses'	=>	'BitcoinController@buy',
 	'as'	=>	'bitcoin.buy'
 ]);
+
+Route::post('bitcoin/buy', [
+	'uses'	=>	'BitcoinController@buypost',
+	'as'	=>	'bitcoin.buypost'
+]);
+
+Route::get('bitcoin/sell', [
+	'uses'	=>	'BitcoinController@sell',
+	'as'	=>	'bitcoin.sell'
+]);
+
+Route::post('bitcoin/sell', [
+	'uses'	=>	'BitcoinController@sellpost',
+	'as'	=>	'bitcoin.sellpost'
+]);

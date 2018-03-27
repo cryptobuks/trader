@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+require('bootstrap-notify');
+
 window.Vue = require('vue');
 
 /**
@@ -26,3 +28,5 @@ $("#bitcoin,#price").keyup(function () {
     $('#output').val($('#bitcoin').val() * $('#price').val());
 
 });
+
+	
