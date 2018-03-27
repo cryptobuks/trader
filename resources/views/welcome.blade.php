@@ -1,48 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<body>
+@extends('layouts.app')
+
+@section('content')
 	<div class="container">
-		{!! Form::open(['method' => 'POST', 'url' => 'routeName']) !!}
-
-		    <div class="form-group{{ $errors->has('bitcoin') ? ' has-error' : '' }}">
-		        {!! Form::label('bitcoin', 'Bitcoin') !!}
-		        {!! Form::number('bitcoin', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'bitcoin']) !!}
-		        <small class="text-danger">{{ $errors->first('bitcoin') }}</small>
-		    </div>
-
-		    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-		        {!! Form::label('price', 'Price') !!}
-		        {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'price']) !!}
-		        <small class="text-danger">{{ $errors->first('price') }}</small>
-		    </div>
-
-		    <div class="form-group{{ $errors->has('output') ? ' has-error' : '' }}">
-		        {!! Form::label('output', 'Output') !!}
-		        {!! Form::text('output', null, ['class' => 'form-control', 'required' => 'required', 'id' => 'output', 'disabled']) !!}
-		        <small class="text-danger">{{ $errors->first('output') }}</small>
-		    </div>
-
-		    <div class="btn-group pull-right">
-		        {!! Form::submit("Submit", ['class' => 'btn btn-success']) !!}
-		    </div>
-
-		{!! Form::close() !!}
+		<div class="card">
+		  <img class="card-img-top" src="http://s1.1zoom.me/b5050/31/Money_Coins_Crypto-currency_Bitcoin_536533_1920x1080.jpg" alt="">
+		  <div class="card-body">
+		    <h5 class="card-title">Bitcoin</h5>
+		    <p class="card-text">Go to Bitcoin Market</p>
+		    <a href="{{ url('bitcoin') }}" class="btn btn-primary">Go to Bitcoin Market</a>
+		  </div>
+		</div>
+		<br>
+		<div class="card">
+		  <img class="card-img-top" src="http://s1.1zoom.me/b5050/31/Money_Coins_Crypto-currency_Bitcoin_536533_1920x1080.jpg" alt="">
+		  <div class="card-body">
+		    <h5 class="card-title">Etherium</h5>
+		    <p class="card-text">Go to Etherium Market</p>
+		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
+		<br>
+		<div class="card">
+		  <img class="card-img-top" src="http://s1.1zoom.me/b5050/31/Money_Coins_Crypto-currency_Bitcoin_536533_1920x1080.jpg" alt="">
+		  <div class="card-body">
+		    <h5 class="card-title">Ripple</h5>
+		    <p class="card-text">Go to Ripple Market</p>
+		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
 	</div>
+	
 
-<!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript">
-
-		$("#bitcoin,#price").keyup(function () {
-
-		    $('#output').val($('#bitcoin').val() * $('#price').val());
-
-		});
-
-    </script>
-</body>
-</html>
+@stop

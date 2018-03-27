@@ -11,10 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/', [
+	'uses'	=>	'HomeController@home',
+	'as'	=>	'home.index'
+]);
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('bitcoin', [
+	'uses'	=>	'BitcoinController@index',
+	'as'	=>	'bitcoin.index'
+]);
+
+Route::get('bitcoin/buy', [
+	'uses'	=>	'BitcoinController@buy',
+	'as'	=>	'bitcoin.buy'
+]);
