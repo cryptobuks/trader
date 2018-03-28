@@ -45,3 +45,8 @@ Route::post('bitcoin/sell', [
 	'uses'	=>	'BitcoinController@sellpost',
 	'as'	=>	'bitcoin.sellpost'
 ]);
+
+Route::get('profile', [
+	'uses'	=>	'ProfileController@index',
+	'as'	=>	'profile.index'
+]);

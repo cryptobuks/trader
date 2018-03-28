@@ -51,7 +51,7 @@
 			    </tr>
 			  </tbody>
 			</table>
-		    <a href="#" class="btn btn-primary">Sell</a>
+		    <a href="{{ url('bitcoin/sell') }}" class="btn btn-primary">Sell</a>
 		  </div>
 		</div>
 	</div>

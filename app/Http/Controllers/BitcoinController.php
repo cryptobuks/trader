@@ -28,6 +28,7 @@ class BitcoinController extends Controller
             'price' => 'required|max:10',
         ]);
 
+    	
     	//Bitcoin Listing for User
         $listing = new BitcoinBuyerListing;
         $listing->bitcoin = $request->bitcoin;
@@ -37,18 +38,52 @@ class BitcoinController extends Controller
 	    $listing->save();
 	    
 	    $market = BitcoinBuyMarket::where('price', $request->price)->first();
-	    
-	    if ($market == !null) {
+	    $seller = BitcoinSellMarket::where('price', '<=', $request->price)->first();
+
+	    if ($seller == !null) {
+	    	if ($seller->bitcoin <= $request->bitcoin) {
+	    		$marketplus = $request->bitcoin - $seller->bitcoin;
+	    		
+	    		if ($market == !null) {
+	    			$market->bitcoin = $market->bitcoin + $marketplus;
+	    			$market->save();
+	    		}else{
+	    			if ($marketplus == !0) {
+	    				$newmarket = new BitcoinBuyMarket;
+				    	$newmarket->price = $request->price;
+				    	$newmarket->bitcoin = $marketplus;
+				    	$newmarket->save();
+	    			}
+	    			
+	    		}
+	    		
+	    		$seller->delete();
+
+	    	}
+	    	else{
+	    		$seller->bitcoin = $seller->bitcoin - $request->bitcoin;
+
+	    		if ($seller->bitcoin == 0) {
+	    			$seller->delete();
+		    	}
+		    	else{
+		    		$seller->save();
+		    	}
+	    	}
+
+	    	
+	    }
+
+	    elseif ($market == !null) {
 	    	$market->bitcoin = $market->bitcoin + $request->bitcoin;
 	    	$market->save();
-	    }
-	    else{
+	    } else {
 	    	$newmarket = new BitcoinBuyMarket;
 	    	$newmarket->price = $request->price;
 	    	$newmarket->bitcoin = $request->bitcoin;
 	    	$newmarket->save();
 	    }
-	    
+
 	    return back()->with('status', 'Your Listing Added on Market');
     }
 
@@ -72,11 +107,47 @@ class BitcoinController extends Controller
 	    $listing->save();
 
 	    $market = BitcoinSellMarket::where('price', $request->price)->first();
-	    if ($market == !null) {
+	    $buyer = BitcoinBuyMarket::where('price', '<=', $request->price)->first();
+
+	    
+
+	    if ($buyer == !null) {
+	    	if ($buyer->bitcoin <= $request->bitcoin) {
+	    		$marketplus = $request->bitcoin - $buyer->bitcoin;
+	    		
+	    		if ($market == !null) {
+	    			$market->bitcoin = $market->bitcoin + $marketplus;
+	    			$market->save();
+	    		}else{
+	    			if ($marketplus == !0) {
+	    				$newmarket = new BitcoinSellMarket;
+				    	$newmarket->price = $request->price;
+				    	$newmarket->bitcoin = $marketplus;
+				    	$newmarket->save();
+	    			}
+	    			
+	    		}
+	    		
+	    		$buyer->delete();
+
+	    	}
+	    	else{
+	    		$buyer->bitcoin = $buyer->bitcoin - $request->bitcoin;
+
+	    		if ($buyer->bitcoin == 0) {
+	    			$buyer->delete();
+		    	}
+		    	else{
+		    		$buyer->save();
+		    	}
+	    	}
+
+	    	
+	    }
+	    elseif ($market == !null) {
 	    	$market->bitcoin = $market->bitcoin + $request->bitcoin;
 	    	$market->save();
-	    }
-	    else{
+	    } else {
 	    	$newmarket = new BitcoinSellMarket;
 	    	$newmarket->price = $request->price;
 	    	$newmarket->bitcoin = $request->bitcoin;
